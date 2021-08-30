@@ -144,6 +144,7 @@
     <Compile Include="Classes\UserProfile.cs" />
     <Compile Include="Classes\Utilities.cs" />
     <Compile Include="Controllers\BlotterBai_MuajjalController.cs" />
+    <Compile Include="Controllers\BlotterBalDIffController.cs" />
     <Compile Include="Controllers\BlotterBreakupsController.cs" />
     <Compile Include="Controllers\BlotterClearingController.cs" />
     <Compile Include="Controllers\BlotterController.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Models\SBP_BlotterFundsTransfer.cs" />
     <Compile Include="Models\SBP_BlotterManualEstBalance.cs" />
     <Compile Include="Models\SBP_BlotterOpeningBalance.cs" />
+    <Compile Include="Models\SBP_BlotterOpeningClosingBalanceDIfferential.cs" />
     <Compile Include="Models\SBP_BlotterRECON.cs" />
     <Compile Include="Models\SBP_BlotterRTGS.cs" />
     <Compile Include="Models\BlottterEmails.cs" />
@@ -215,6 +217,7 @@
     <Compile Include="Models\SP_GetOPICSManualData_Result.cs" />
     <Compile Include="Models\SP_GetSBPBlotterCRD_Result.cs" />
     <Compile Include="Models\SP_GetSBPBlotterFR_Result.cs" />
+    <Compile Include="Models\SP_GetSBPBlotterOpeningClosingBalanceDIfferential_Result.cs" />
     <Compile Include="Models\SP_GetSBPBlotterRECON_Result.cs" />
     <Compile Include="Models\SP_SBPBlotterRunningBal.cs" />
     <Compile Include="Models\SP_SBPBlotter_FCY_Result.cs" />
@@ -1294,6 +1297,7 @@
     <Content Include="Views\BlotterBai_Muajjal\_BlotterBai_Muajjal.cshtml" />
     <Content Include="Views\BlotterBai_Muajjal\_Create.cshtml" />
     <Content Include="Views\BlotterBai_Muajjal\_Edit.cshtml" />
+    <Content Include="Views\BlotterBalanceDIfferential\_BlotterOpenCloseBalDiff.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

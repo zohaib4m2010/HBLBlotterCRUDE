@@ -37,6 +37,9 @@ namespace WebBlotter.Models
         public decimal AvgForRemDays { get; set; }
         public decimal ReserveSurplus { get; set; }
         public double Reserve { get; set; }
+        public decimal CRR5PcrReqWithoutEB { get; set; }
+        public Nullable<double> BalMaintAgainstExtBenft { get; set; }
+        public Nullable<double> BalMaintAgainstPenalty { get; set; }
         public string Remarks { get; set; }
         public Nullable<int> BR { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
