@@ -11,10 +11,12 @@ namespace WebBlotter.Models
         public long Id { get; set; }
         public Nullable<decimal> EstimatedOpenBal { get; set; }
 
+        [Required]
         [Display(Name = "Opening Balance Actual")]
         [DisplayFormat(DataFormatString = "{0:N2}")]
         public Nullable<decimal> OpenBalActual { get; set; }
         public Nullable<decimal> AdjOpenBal { get; set; }
+        [Required]
         [Display(Name = "Date")]
         [DataType(System.ComponentModel.DataAnnotations.DataType.Date, ErrorMessage = "Date only")]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]

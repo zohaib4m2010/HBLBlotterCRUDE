@@ -25,10 +25,21 @@ namespace WebBlotter.Controllers
                 selectCurrency = Convert.ToInt32(Session["SelectedCurrency"].ToString());
 
             UtilityClass.GetSelectedCurrecy(selectCurrency);
+
+            var DateVal = "";
+            if (form["SearchByDate"] != null)
+            {
+                DateVal = form["SearchByDate"].ToString();
+                ViewBag.DateVal = DateVal;
+            }
+            else
+            {
+                ViewBag.DateVal = DateTime.Now.ToString("yyyy-MM-dd");
+            }
             #endregion
 
             ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.GetResponse("/api/BlotterBalanceDIfferential/GetAllblotteropeningclosingbaldiff?BranchID=" + Session["BranchID"].ToString() + "&CurID=" + selectCurrency + "&BR=" + Session["BR"].ToString());
+            HttpResponseMessage response = serviceObj.GetResponse("/api/BlotterBalanceDIfferential/GetAllblotteropeningclosingbaldiff?BranchID=" + Session["BranchID"].ToString() + "&CurID=" + selectCurrency + "&BR=" + Session["BR"].ToString() + "&DateVal=" + DateVal);
             response.EnsureSuccessStatusCode();
             List<Models.SP_GetSBPBlotterOpeningClosingBalanceDIfferential_Result> blotterBD = response.Content.ReadAsAsync<List<Models.SP_GetSBPBlotterOpeningClosingBalanceDIfferential_Result>>().Result;
             if (blotterBD.Count < 1)
@@ -46,7 +57,7 @@ namespace WebBlotter.Controllers
             HttpResponseMessage response = serviceObj.PostResponse("api/BlotterBalanceDIfferential/UpdateOpeningClosingBalanceDifferential", BalDiffIds);
             response.EnsureSuccessStatusCode();
             //UtilityClass.ActivityMonitor(Convert.ToInt32(Session["UserID"]), Session.SessionID, Request.UserHostAddress.ToString(), new Guid().ToString(), JsonConvert.SerializeObject(employeeIdsToDelete), this.RouteData.Values["action"].ToString(), Request.RawUrl.ToString());
-            return RedirectToAction("BlotterBalanceDIfferential");
+            return RedirectToAction("_BlotterOpenCloseBalDiff");
         }
 
     }

@@ -54,64 +54,79 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<div>
+<!--Search By Date -->
+    @using (Html.BeginForm(Session["ActiveController"].ToString(), Session["ActiveAction"].ToString(), FormMethod.Post))
+    {
+        @Html.AntiForgeryToken();
+    <div class="row">
+        <br />
+        <div class="col-md-2">
+            <input id="SearchByDateId" name="SearchByDate" type="date" value="@ViewBag.DateVal" class="form-control datepicker text-box single-line" />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" class="btn btn-success" style="width: 200px" name="Save" value="Search" />
+        </div>
+    </div>
+    }
+    <!--Search By Date -->
+    <div>
 
-    @*<script src="Scripts/moment.js"></script>*@
-    <table id="customers" class="table table-striped table-bordered table-hover ">
-        <thead>
-            <tr>
-                <th>S.No. </th>
-                <th>Date        </th>
-                @if (Session["BR"].ToString() != "01")
+        @*<script src="Scripts/moment.js"></script>*@
+        <table id="customers" class="table table-striped table-bordered table-hover ">
+            <thead>
+                <tr>
+                    <th>S.No. </th>
+                    <th>Date        </th>
+                    @if (Session["BR"].ToString() != "01")
+                    {
+                        <th>Data Type</th>}
+                    <th>Transaction Type</th>
+                    <th>Description</th>
+                    <th>InFlow</th>
+                    <th>OutFlow</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <Clearingdy>
+
+                @foreach (var item in Model)
                 {
-                    <th>Data Type</th>}
-                <th>Transaction Type</th>
-                <th>Description</th>
-                <th>InFlow</th>
-                <th>OutFlow</th>
-                <th></th>
-            </tr>
-        </thead>
-        <Clearingdy>
-
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td width="6%">@Html.DisplayFor(modelItem => item.SNo)</td>
-                <td id="DealDate" width="8%">
-                    @Html.DisplayFor(modelItem => item.Clearing_Date)
-                    <script>
+                    <tr>
+                        <td width="6%">@Html.DisplayFor(modelItem => item.SNo)</td>
+                        <td id="DealDate" width="8%">
+                            @Html.DisplayFor(modelItem => item.Clearing_Date)
+                            <script>
                                   var NowMoment = moment("@Html.DisplayFor(modelItem => item.Clearing_Date)");
                                     var eDisplayMoment = document.getElementById('DealDate');
                                  eDisplayMoment.innerHTML = NowMoment.format('DD-MMM-YYYY');
-                    </script>
-                </td>
+                            </script>
+                        </td>
 
-                @if (Session["BR"].ToString() != "01")
-                {
-                    <td align="right" width="8%">@Html.DisplayFor(modelItem => item.DataType)</td>
+                        @if (Session["BR"].ToString() != "01")
+                        {
+                            <td align="right" width="8%">@Html.DisplayFor(modelItem => item.DataType)</td>
+                        }
+                        <td align="left" width="8%">@Html.DisplayFor(modelItem => item.TransactionType)</td>
+                        <td align="left" width="8%">@Html.DisplayFor(modelItem => item.Note)</td>
+                        <td align="right" width="8%">@Html.DisplayFor(modelItem => item.Clearing_InFlow)</td>
+                        <td align="right" width="10%">@Html.DisplayFor(modelItem => item.Clearing_OutFLow)</td>
+
+
+                        <td width="18%" align="right">
+                            @if ((bool)ViewData["isEditable"])
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = item.SNo })
+                            }
+                            |
+                            @if ((bool)ViewData["IsDeletable"])
+                            {
+                                @*@Html.ActionLink("Details", "Details", new { id = item.SNo }) |*@
+                                @Html.ActionLink("Delete", "Delete", new { id = item.SNo })
+                            }
+                        </td>
+                    </tr>
+
                 }
-                <td align="left" width="8%">@Html.DisplayFor(modelItem => item.TransactionType)</td>
-                <td align="left" width="8%">@Html.DisplayFor(modelItem => item.Note)</td>
-                <td align="right" width="8%">@Html.DisplayFor(modelItem => item.Clearing_InFlow)</td>
-                <td align="right" width="10%">@Html.DisplayFor(modelItem => item.Clearing_OutFLow)</td>
 
-
-                <td width="18%" align="right">
-                    @if ((bool)ViewData["isEditable"])
-                    {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.SNo })
-                    }
-                    |
-                    @if ((bool)ViewData["IsDeletable"])
-                    {
-                        @*@Html.ActionLink("Details", "Details", new { id = item.SNo }) |*@
-                        @Html.ActionLink("Delete", "Delete", new { id = item.SNo })
-                    }
-                </td>
-            </tr>
-
-            }
-
-    </table>
-</div>
+        </table>
+    </div>

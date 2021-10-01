@@ -11,6 +11,32 @@
 
 
 <div class="container">
+
+
+    <div>
+        @using (Html.BeginForm(Session["ActiveController"].ToString(), Session["ActiveAction"].ToString(), FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="control-label" for="Clearing_Date">Start Date</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control datepicker text-box single-line" data-val="true" data-val-date="The field Date must be a date." id="startdate" name="startdate" type="date" value="@ViewBag.SetStartDate">
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label">End Date</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control datepicker text-box single-line" data-val="true" data-val-date="The field Date must be a date." id="enddate" name="enddate" type="date" value="@ViewBag.SetEndDate">
+                </div>
+
+                <div class="col-md-2">
+                    <input type="submit" id="SearchManualDataByDate" value="Search" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+    <br />
     @if (ViewData["DataStatus"] == "Data Not Availavle")
     {
         <br />

@@ -62,12 +62,14 @@ namespace WebBlotter.Models
         [Required]
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<decimal> TimeLiablitiesOverOneYear { get; set; }
+  
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<decimal> DemandTimeLiablitiesTotal { get; set; }
 
         [Required]
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<decimal> PreMatureDeposit { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<decimal> DemandTimeLiablitiesTotalForCRR { get; set; }
 

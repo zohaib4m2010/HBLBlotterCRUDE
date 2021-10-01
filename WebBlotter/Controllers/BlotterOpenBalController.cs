@@ -29,10 +29,21 @@ namespace WebBlotter.Controllers
                     selectCurrency = Convert.ToInt32(Session["SelectedCurrency"].ToString());
 
                 UtilityClass.GetSelectedCurrecy(selectCurrency);
+
+                var DateVal = "";
+                if (form["SearchByDate"] != null)
+                {
+                    DateVal = form["SearchByDate"].ToString();
+                    ViewBag.DateVal = DateVal;
+                }
+                else
+                {
+                    ViewBag.DateVal = DateTime.Now.ToString("yyyy-MM-dd");
+                }
                 #endregion
 
                 ServiceRepository serviceObj = new ServiceRepository();
-                HttpResponseMessage response = serviceObj.GetResponse("/api/BlotterOpenBal/GetAllBlotterOpenBal?UserID=" + Session["UserID"].ToString() + "&BranchID=" + Session["BranchID"].ToString() + "&CurID=" + Session["SelectedCurrency"].ToString() + "&BR=" + Session["BR"].ToString());
+                HttpResponseMessage response = serviceObj.GetResponse("/api/BlotterOpenBal/GetAllBlotterOpenBal?UserID=" + Session["UserID"].ToString() + "&BranchID=" + Session["BranchID"].ToString() + "&CurID=" + Session["SelectedCurrency"].ToString() + "&BR=" + Session["BR"].ToString() + "&DateVal=" + DateVal);
                 response.EnsureSuccessStatusCode();
                 List<Models.SBP_BlotterOpeningBalance> BlotterOpenBal = response.Content.ReadAsAsync<List<Models.SBP_BlotterOpeningBalance>>().Result;
                 var PAccess = Session["CurrentPagesAccess"].ToString().Split('~');

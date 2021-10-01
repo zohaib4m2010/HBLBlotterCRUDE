@@ -15,9 +15,6 @@ namespace WebBlotter.Models
         [DataType(System.ComponentModel.DataAnnotations.DataType.Date, ErrorMessage = "Date only")]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> RTGS_Date { get; set; }
-
-        [Display(Name = "Code")]
-        [DisplayFormat(DataFormatString = "{0:N2}")]
         public string RTGSCOde { get; set; }
 
         [Required]

@@ -1,0 +1,224 @@
+﻿
+
+<script>
+    $(document).ready(function () {
+
+        sumval = 0;
+        sumBal = 0;
+        $('#BlotterDTLReportDayWise .PKSum').each(function () {
+            sumval = this.innerText;
+            sumval = sumval.replace(/\,/g, '');
+            sumBal += parseFloat(sumval) //+OpeningB1;
+        });
+        $("#lblPKSumVal").text(sumBal);
+        
+
+        var lblFBR5 = (parseFloat(($('#BlotterDTLReportDayWise .CRR5PcrReq')[0].innerText).replace(/\,/g, '')) * 14).toLocaleString('en-CA');
+        $("#lblFBR5").text(lblFBR5);
+
+        var lblbmapval = $('#BalMaintAgainstPenalty').val();
+        $("#lblbmap").text(lblbmapval);
+
+        var lblbmaebval = $('#BalMaintAgainstExtBenft').val();
+        $("#lblbmaeb").text(lblbmaebval);
+
+        var AvgBHval1 = $('#BlotterDTLReportDayWise .PKSumVal')[0].innerText;
+        $("#AvgBHval1").text(AvgBHval1);
+        
+
+        var AvgBHval2 = parseFloat(($('#BlotterDTLReportShort .AvgBH')[0].innerText).replace(/\,/g, '')) - parseFloat(($('#BlotterDTLReportShort .FBR5')[0].innerText).replace(/\,/g, ''));
+        $("#AvgBHval2").text(AvgBHval2);
+
+        var lblrfsw = (parseFloat(($('#CRR3PcrReq').val()).replace(/\,/g, '')) - parseFloat(($('#BlotterDTLReportDayWise .CRR5PcrReq')[0].innerText).replace(/\,/g, ''))) + parseFloat(($('#BlotterDTLReportDayWise .ReserveSurplus')[12].innerText).replace(/\,/g, ''));
+        $("#lblrfsw").text(lblrfsw);
+        
+        var AvgBHval3 = null;
+        if (((0.05 / parseFloat(($('#BlotterDTLReportShort .FBR5')[0].innerText).replace(/\,/g, '')) * parseFloat(($('#BlotterDTLReportShort .AvgBH')[0].innerText).replace(/\,/g, ''))) * 100) >= 5) {
+            AvgBHval3 = ((0.05 / parseFloat(($('#BlotterDTLReportShort .FBR5')[0].innerText).replace(/\,/g, '')) * parseFloat(($('#BlotterDTLReportShort .AvgBH')[0].innerText).replace(/\,/g, ''))) * 100).toFixed(2);
+            $("#AvgBHval3").text(AvgBHval3+'%');
+        }
+        else {
+            AvgBHval3 = ((0.05 / parseFloat(($('#BlotterDTLReportShort .FBR5')[0].innerText).replace(/\,/g, '')) * parseFloat(($('#BlotterDTLReportShort .AvgBH')[0].innerText).replace(/\,/g, ''))) * 100).toFixed(2);
+            $("#AvgBHval3").text(AvgBHval3+'%');
+        }
+
+        var AvgBHval4 = null;
+        if ((0.05 / (parseFloat(($('#CRR5PcrReqWithoutEB').val()).replace(/\,/g, '')) * 14)) * parseFloat(($('#BlotterDTLReportDayWise .PKSumVal')[0].innerText).replace(/\,/g, '')) * 100 >= parseFloat($('#BalMaintAgainstExtBenft').val())) {
+            AvgBHval4 = ((0.05 / (parseFloat(($('#CRR5PcrReqWithoutEB').val()).replace(/\,/g, '')) * 14)) * parseFloat(($('#BlotterDTLReportDayWise .PKSumVal')[0].innerText).replace(/\,/g, '')) * 100).toFixed(2);
+            $("#AvgBHval4").text(AvgBHval4+'%');
+        }
+        else {
+            AvgBHval4 = ((0.05 / (parseFloat(($('#CRR5PcrReqWithoutEB').val()).replace(/\,/g, '')) * 14)) * parseFloat(($('#BlotterDTLReportDayWise .PKSumVal')[0].innerText).replace(/\,/g, '')) * 100).toFixed(2);
+            $("#AvgBHval4").text(AvgBHval4+'%');
+        }
+
+        var AvgBHHeadingVal = null;
+        if (parseFloat(($('#BlotterDTLReportShort .AvgBH')[0].innerText).replace(/\,/g, '')) > parseFloat(($('#BlotterDTLReportShort .FBR5')[0].innerText).replace(/\,/g, ''))) {
+            AvgBHHeadingVal = 'Fortnightly Long Position';
+            $("#lblAvgBHHeading").text(AvgBHHeadingVal);
+        } else if (parseFloat(($('#BlotterDTLReportShort .AvgBH')[0].innerText).replace(/\,/g, '')) < parseFloat(($('#BlotterDTLReportShort .FBR5')[0].innerText).replace(/\,/g, ''))) {
+            AvgBHHeadingVal = 'Fortnightly Short Position';
+            $("#lblAvgBHHeading").text(AvgBHHeadingVal);
+        }
+
+
+        var RoomforSecondWed = (parseFloat(($('#CRR3PcrReq').val()).replace(/\,/g, '')) - parseFloat(($('#BlotterDTLReportDayWise .CRR5PcrReq')[0].innerText).replace(/\,/g, ''))) + parseFloat(($('#BlotterDTLReportDayWise .ReserveSurplus')[12].innerText).replace(/\,/g, ''));
+        $("lblrfsw").text(RoomforSecondWed);
+    });
+</script>
+<div>
+    <div class="row">
+        <div class="row">
+            <div class="col-md-7"><h3>Amount in Million</h3></div>
+            @if (ViewBag.SBP_BlotterCRRReportDaysWiseBal != null)
+            {
+                if (ViewBag.SBP_BlotterCRRReportDaysWiseBal.Count != 0)
+                {
+                    <div class="col-md-5"><h3>CRR 3% Requirement : @ViewBag.SBP_BlotterCRRReportDaysWiseBal[0].CRR3PcrReq.ToString("#,##0,,")</h3></div>
+                }
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @if (ViewBag.SBP_BlotterCRRReportDaysWiseBal != null)
+                {
+                    if (ViewBag.SBP_BlotterCRRReportDaysWiseBal.Count != 0)
+                    {
+                        <input type="text" hidden id="CRR5PcrReqWithoutEB" value="@ViewBag.SBP_BlotterCRRReportDaysWiseBal[0].CRR5PcrReqWithoutEB.ToString("#,##0,,")" />
+                        <input type="text" hidden id="BalMaintAgainstPenalty" value="@ViewBag.SBP_BlotterCRRReportDaysWiseBal[0].BalMaintAgainstPenalty.ToString("#0.#0")%" />
+                        <input type="text" hidden id="BalMaintAgainstExtBenft" value="@ViewBag.SBP_BlotterCRRReportDaysWiseBal[0].BalMaintAgainstExtBenft.ToString("#0.#0")%" />
+                        <input type="text" hidden id="CRR3PcrReq" value="@ViewBag.SBP_BlotterCRRReportDaysWiseBal[0].CRR3PcrReq.ToString("#,##0,,")%" />
+                    }
+                }
+                <table id="BlotterDTLReportDayWise" class="table table-striped table-bordered table-hover ">
+                    <thead>
+                        <tr>
+                            <th>Date </th>
+                            <th>Week Day</th>
+                            @*<th>Karachi</th>*@
+                            <th>CRR 5% Requirement</th>
+                            <th>Amount Balance Maintained-Pakistan</th>
+                            <th>Balance Maintained in %age</th>
+                            @*<th>Balance Maintained in 3%</th>*@
+                            <th>Long/(short) in 5% Amount</th>
+                            @*<th>CRR 3% Requirement</th>*@
+                            <th>Long/(short) in 3% Amount</th>
+                            <th>AvgForRemDays</th>
+                            <th>Reserve/Surplus as per 5%</th>
+                            <th>Reserve</th>
+                            <th>Remarks</th>
+                            @*<th>Penalty</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.SBP_BlotterCRRReportDaysWiseBal != null)
+                        {
+                            var i = 0;
+                            foreach (var item in ViewBag.SBP_BlotterCRRReportDaysWiseBal)
+                            {
+                                <tr>
+                                    <td align="left" width="8%">@item.ReportDate.ToString("dd/MM/yyyy")</td>
+                                    <td align="left" width="8%">@item.WeekDays</td>
+                                    @*<td align="left" width="8%" class="KHISum">@item.KarachiTotal.ToString("#,##0,,")</td>*@
+                                    <td align="left" width="8%" class="CRR5PcrReq">@item.CRR5PcrReq.ToString("#,##0,,")</td>
+                                    <td align="left" width="8%" class="PKSum">@item.PakistanToTal.ToString("#,##0,,")</td>
+                                    <td align="left" width="8%">@((item.BalMaintain5Pcr).ToString("#0.##0%"))</td>
+                                    @*<td align="left" width="8%">@item.BalMaintain3Pcr</td>*@
+                                    <td align="left" width="8%">@((Convert.ToDecimal(item.PakistanToTal) - Convert.ToDecimal(item.CRR5PcrReq)).ToString("#,##0,,"))</td>
+                                    <td align="left" width="8%">@((Convert.ToDecimal(item.PakistanToTal) - Convert.ToDecimal(item.CRR3PcrReq)).ToString("#,##0,,"))</td>
+                                    <td align="left" width="8%">@((item.AvgForRemDays).ToString("#,##0,,"))</td>
+                                    <td align="left" width="8%" class="ReserveSurplus">@((item.ReserveSurplus).ToString("#,##0,,"))</td>
+                                    <td align="left" width="8%">@((item.Reserve).ToString("#0.##0%"))</td>
+                                    @*<td align="left" width="8%">@item.CRR3PcrReq.ToString("#,##0,,")</td>*@
+                                    @if (item.Remarks == "Warning")
+                                    {
+                                        <td align="left" width="8%" style="background-color: #ff7171bf;   color: #f00;  font-weight: bold;">@item.Remarks</td>
+                                    }
+                                    else if (item.Remarks == "OK")
+                                    {
+                                        <td align="left" width="8%" style="background-color: #73ff71bf;   color: #1ec141;  font-weight: bold;">@item.Remarks</td>
+                                    }
+                                    else
+                                    {
+                                        <td align="left" width="8%">@item.Remarks</td>
+                                    }
+
+                                    @*<td align="left" width="8%">@item.Penalty.ToString("#,##0,,M")</td>*@
+                                </tr>
+                            }
+                        }
+                        <tr>
+                            <td align="left" width="8%"></td>
+                            <td align="left" width="8%"></td>
+                            <td align="left" width="8%"></td>
+                            <td align="left" width="8%">
+                                <label id="lblPKSumVal" class="PKSumVal"></label>
+                            </td>
+                            <td align="left" width="8%"></td>
+                            <td align="left" width="8%"></td>
+                            <td align="left" width="8%"></td>
+                            <td align="left" width="8%"></td>
+                            <td align="left" width="8%"></td>
+                            <td align="left" width="8%"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table id="BlotterDTLReportShort" class="table table-striped table-bordered table-hover ">
+                    <tbody>
+                        <tr>
+                            <td>Fortnightly Balance Req 5% </td>
+                            <td>
+                                <label id="lblFBR5" class="FBR5"></label>
+                            </td>
+                            <td>
+                                <label id="lblbmap"></label>
+                            </td>
+                            <td>Including Penalty</td>
+                            <td>
+                                <label id="lblbmaeb"></label>
+                            </td>
+                            <td>Excluding Penalty</td>
+                        </tr>
+                        <tr>
+                            <td>Average Balance  Held</td>
+                            <td>
+                                <label id="AvgBHval1" class="AvgBH"></label>
+                            </td>
+                            <td align="left" width="8%" style="background-color: #73ff71bf; color: #1ec141; font-weight: bold;">
+                                <label id="AvgBHval3"></label>
+                            </td>
+
+                            <td>Including Benefit</td>
+                            <td align="left" width="8%" style="background-color: #73ff71bf;   color: #1ec141;  font-weight: bold;">
+                                <label id="AvgBHval4"></label>
+                            </td>
+
+                            <td>Excluding Benefit</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label id="lblAvgBHHeading" class="AvgBHHeading"></label>
+                            </td>
+                            <td>
+                                <label id="AvgBHval2" class="AvgBH"></label>
+                            </td>
+                            <td>
+                                <label id="lblrfsw"></label>
+                            </td>
+                            <td>
+                                Room For Second Wednesday
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

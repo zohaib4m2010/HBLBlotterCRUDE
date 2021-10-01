@@ -154,7 +154,7 @@ namespace WebBlotter.Controllers
                     return RedirectToAction("UserProfile");
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { return View(SBP_LoginInfo); }
             return PartialView("UserProfile", SBP_LoginInfo);
         }
 

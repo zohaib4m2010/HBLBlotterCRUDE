@@ -21,7 +21,7 @@ namespace WebBlotter.Models
         public string DealType { get; set; }
         [Required]
         public string Broker { get; set; }
-
+        [Required]
         [DisplayName("Issue Date")]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Issue_Date { get; set; }
@@ -43,5 +43,7 @@ namespace WebBlotter.Models
         public int BID { get; set; }
         public int CurID { get; set; }
         public string Flag { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<bool> Status { get; set; }
     }
 }

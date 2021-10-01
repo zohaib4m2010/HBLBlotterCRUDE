@@ -21,6 +21,8 @@ namespace WebBlotter.Controllers
         public ActionResult BlotterCRRFINCON(FormCollection form)
         {
             #region Added by shakir (Currency parameter)
+            string StartDate = "";
+            string EndDate = "";
 
             var selectCurrency = (dynamic)null;
             if (form["selectCurrency"] != null)
@@ -29,10 +31,29 @@ namespace WebBlotter.Controllers
                 selectCurrency = Convert.ToInt32(Session["SelectedCurrency"].ToString());
             UtilityClass.GetSelectedCurrecy(selectCurrency);
 
+            // Date Parameters
+            if (form["startdate"] != null)
+            {
+                StartDate = form["startdate"].ToString();
+                ViewBag.SetStartDate = StartDate;
+            }
+            else
+            {
+                ViewBag.SetStartDate = DateTime.Now.ToString("yyyy-MM-dd");
+            }
+            if (form["enddate"] != null)
+            {
+                EndDate = form["enddate"].ToString();
+                ViewBag.SetEndDate = EndDate;
+            }
+            else
+            {
+                ViewBag.SetEndDate = DateTime.Now.ToString("yyyy-MM-dd");
+            }
             #endregion
 
             ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.GetResponse("/api/BlotterCRRFINCON/GetAllBlotterCRRFINCON?UserID=" + Session["UserID"].ToString() + "&BranchID=" + Session["BranchID"].ToString() + "&CurID=" + Session["SelectedCurrency"].ToString() + "&BR=" + Session["BR"].ToString());
+            HttpResponseMessage response = serviceObj.GetResponse("/api/BlotterCRRFINCON/GetAllBlotterCRRFINCON?UserID=" + Session["UserID"].ToString() + "&BranchID=" + Session["BranchID"].ToString() + "&CurID=" + Session["SelectedCurrency"].ToString() + "&BR=" + Session["BR"].ToString() + "&StartDate=" + StartDate + "&EndDate=" + EndDate);
             response.EnsureSuccessStatusCode();
             List<Models.SBP_BlotterCRRFINCON> blotterCRRFINCON = response.Content.ReadAsAsync<List<Models.SBP_BlotterCRRFINCON>>().Result;
             if (blotterCRRFINCON.Count < 1)

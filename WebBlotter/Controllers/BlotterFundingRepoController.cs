@@ -250,10 +250,22 @@ namespace WebBlotter.Controllers
                 selectCurrency = Convert.ToInt32(Session["SelectedCurrency"].ToString());
 
             UtilityClass.GetSelectedCurrecy(selectCurrency);
+
+            var DateVal = (dynamic)null;
+            if (form["SearchByDate"] != null)
+            {
+                DateVal = form["SearchByDate"].ToString();
+                ViewBag.DateVal = DateVal;
+            }
+            else
+            {
+                DateVal = DateTime.Now.ToString("yyyy-MM-dd");
+                ViewBag.DateVal = DateVal;
+            }
             #endregion
 
             ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.GetResponse("/api/BlotterFundingRepo/GetAllblotterFundingRepo?UserID=" + Session["UserID"].ToString() + "&BranchID=" + Session["BranchID"].ToString() + "&CurID=" + selectCurrency + "&BR=" + Session["BR"].ToString());
+            HttpResponseMessage response = serviceObj.GetResponse("/api/BlotterFundingRepo/GetAllblotterFundingRepo?UserID=" + Session["UserID"].ToString() + "&BranchID=" + Session["BranchID"].ToString() + "&CurID=" + selectCurrency + "&BR=" + Session["BR"].ToString() + "&DateVal=" + DateVal);
             response.EnsureSuccessStatusCode();
             List<Models.SP_GetSBPBlotterFR_Result> blotterFR = response.Content.ReadAsAsync<List<Models.SP_GetSBPBlotterFR_Result>>().Result;
             if (blotterFR.Count < 1)
@@ -284,6 +296,7 @@ namespace WebBlotter.Controllers
                 if (ModelState.IsValid)
                 {
                     model.CreateDate = DateTime.Now.Date;
+                    model.Date = DateTime.Now.Date;
 
                     //ViewBag.FRBanks = GetAllNostroBanks();
                 }
@@ -367,7 +380,9 @@ namespace WebBlotter.Controllers
                             BID = Convert.ToInt16(Session["BranchID"].ToString()),
                             BR = Convert.ToInt16(Session["BR"].ToString()),
                             CurID = Convert.ToInt16(Session["SelectedCurrency"].ToString()),
-                            CreateDate = DateTime.Now
+                            CreateDate = DateTime.Now,
+                            Date = DateTime.Now,
+                            Status = true
                         });
                     }
                 }

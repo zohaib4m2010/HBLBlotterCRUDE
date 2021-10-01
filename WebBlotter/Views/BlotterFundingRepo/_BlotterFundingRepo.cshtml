@@ -8,21 +8,6 @@
 <link href="~/css/Custom.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<h3>BLOTTER Funding Repo</h3>
-
-<p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "primary-btn1 fa fa-plus" })
-</p>
-
-@*@if (TempData["DataStatus"] != "Data not available" && TempData["DataStatus"] != null)
-{
-    <div class="snackbar btn btn-success bg-info px-3 py-3">@TempData["DataStatus"]</div>
-}
-else
-{
-    <h2 class="alert-dark">@TempData["DataStatus"]</h2>
-}*@
-
 <script>
     $(function () {
         $("#chkAll").change(function () {
@@ -30,6 +15,28 @@ else
         });
     });
 </script>
+
+<h3>BLOTTER Funding Repo</h3>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "primary-btn1 fa fa-plus" })
+</p>
+
+<!--Search By Date -->
+@using (Html.BeginForm(Session["ActiveController"].ToString(), Session["ActiveAction"].ToString(), FormMethod.Post))
+{
+    @Html.AntiForgeryToken();
+    <div class="row">
+        <br />
+        <div class="col-md-2">
+            <input id="SearchByDate" name="SearchByDate" type="date" value="@ViewBag.DateVal" class="form-control datepicker text-box single-line" />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" class="btn btn-success" style="width: 200px" name="Save" value="Search" />
+        </div>
+    </div>
+}
+<!--Search By Date -->
 
 @if (Model.Count() > 0)
 {

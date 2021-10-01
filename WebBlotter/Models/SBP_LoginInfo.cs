@@ -17,7 +17,9 @@ namespace WebBlotter.Models
         //[DataType(DataType.Password)]
         //[StringLength(18, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         //[RegularExpression(@"^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\d\W])|(?=.*\W)(?=.*\d))|(?=.*\W)(?=.*[A-Z])(?=.*\d)).{8,}$")]
-        [Required(ErrorMessage = "Password is required")]
+
+
+        //[Required(ErrorMessage = "Password is required")]
         [DisplayName("Password")]
         [StringLength(255, ErrorMessage = "Must be between 8 and 255 characters", MinimumLength = 8)]
         [DataType(DataType.Password)]

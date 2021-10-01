@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<WebBlotter.Models.SP_GetSBPBlotterOpeningClosingBalanceDIfferential_Result>
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "BlotterCRD";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "BlotterCRD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link href="~/css/Custom.css" rel="stylesheet" />
@@ -19,7 +19,23 @@
 </script>
 
 <h3>BLOTTER Opening Closing Balance Differential</h3>
+<br />
 
+<!--Search By Date -->
+@using (Html.BeginForm(Session["ActiveController"].ToString(), Session["ActiveAction"].ToString(), FormMethod.Post))
+{
+    @Html.AntiForgeryToken();
+    <div class="row">
+        <br />
+        <div class="col-md-2">
+            <input id="SearchByDateId" name="SearchByDate" type="date" value="@ViewBag.DateVal" class="form-control datepicker text-box single-line" />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" class="btn btn-success" style="width: 200px" name="Save" value="Search" />
+        </div>
+    </div>
+}
+<!--Search By Date -->
 @if (Model.Count() > 0)
 {
     using (Html.BeginForm("Update", "BlotterBalanceDIfferential", FormMethod.Post))

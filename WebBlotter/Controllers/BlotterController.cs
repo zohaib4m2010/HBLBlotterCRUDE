@@ -34,9 +34,9 @@ namespace WebBlotter.Controllers
                 else
                     selectCurrency = Convert.ToInt32(Session["SelectedCurrency"].ToString());
 
-                if (form["BlotterCurrentDate"] != null)
+                if (form["SearchByDate"] != null)
                 {
-                    BlotterCurrentDate = form["BlotterCurrentDate"].ToString();
+                    BlotterCurrentDate = form["SearchByDate"].ToString();
                     ViewBag.CurrentDt = BlotterCurrentDate;
                 }
                 else
