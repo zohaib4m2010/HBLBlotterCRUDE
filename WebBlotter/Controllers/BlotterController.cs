@@ -50,9 +50,12 @@ namespace WebBlotter.Controllers
 
                 BlotterMultiModel blotterMulit = new BlotterMultiModel();
                 ServiceRepositoryBlotter serviceObj = new ServiceRepositoryBlotter();
+                HttpResponseMessage response;
                 if (Convert.ToInt32(selectCurrency) == 1)
-                {
-                    HttpResponseMessage response = serviceObj.GetResponse("/api/Blotter/GetAllBlotterList?brcode=" + Session["BR"].ToString() + "&DataType=SBP" + "&CurrentDate=" + BlotterCurrentDate);
+                {if(form["LoadData"] != null)
+                     response = serviceObj.GetResponse("/api/Blotter/GetAllBlotterList?brcode=" + Session["BR"].ToString() + "&DataType=SBP" + "&CurrentDate=" + BlotterCurrentDate+"&LoadData=true");
+                    else
+                        response = serviceObj.GetResponse("/api/Blotter/GetAllBlotterList?brcode=" + Session["BR"].ToString() + "&DataType=SBP" + "&CurrentDate=" + BlotterCurrentDate + "&LoadData=false");
                     response.EnsureSuccessStatusCode();
                     List<Models.SP_SBPBlotter_Result> blotter = response.Content.ReadAsAsync<List<Models.SP_SBPBlotter_Result>>().Result;
                     // List<blotterMulit.GetAllBlotter01> blotter = response.Content.ReadAsAsync<List<Models.SP_SBPBlotter_Result>>().Result;
@@ -60,13 +63,13 @@ namespace WebBlotter.Controllers
                 }
                 else
                 {
-                    HttpResponseMessage response = serviceObj.GetResponse("/api/Blotter/GetAllBlotterFCYList?brcode=" + Session["BR"].ToString() + "&CurrId=" + selectCurrency + "&CurrentDate=" + BlotterCurrentDate);
-                    response.EnsureSuccessStatusCode();
-                    List<Models.SP_SBPBlotter_FCY_Result> blotter = response.Content.ReadAsAsync<List<Models.SP_SBPBlotter_FCY_Result>>().Result;
+                    HttpResponseMessage response1 = serviceObj.GetResponse("/api/Blotter/GetAllBlotterFCYList?brcode=" + Session["BR"].ToString() + "&CurrId=" + selectCurrency + "&CurrentDate=" + BlotterCurrentDate);
+                    response1.EnsureSuccessStatusCode();
+                    List<Models.SP_SBPBlotter_FCY_Result> blotter = response1.Content.ReadAsAsync<List<Models.SP_SBPBlotter_FCY_Result>>().Result;
                     blotterMulit.GetAllBlotterFCY01 = blotter;
                 }
 
-                HttpResponseMessage response2 = serviceObj.GetResponse("/api/Blotter/GetLatestOpeningBalaceForToday?&BR=" + Session["BR"].ToString()+"&Date="+ BlotterCurrentDate);
+                HttpResponseMessage response2 = serviceObj.GetResponse("/api/Blotter/GetLatestOpeningBalaceForToday?&BR=" + Session["BR"].ToString() + "&Date=" + BlotterCurrentDate);
                 response2.EnsureSuccessStatusCode();
                 Models.SBP_BlotterOpeningBalance BlotterOpeningBalaceForToday = response2.Content.ReadAsAsync<Models.SBP_BlotterOpeningBalance>().Result;
 
@@ -80,6 +83,8 @@ namespace WebBlotter.Controllers
                 throw;
             }
         }
+
+        
 
         public ActionResult GetAllBlotterInternal(FormCollection form)
         {

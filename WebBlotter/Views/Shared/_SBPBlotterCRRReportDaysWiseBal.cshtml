@@ -10,60 +10,64 @@
             sumval = sumval.replace(/\,/g, '');
             sumBal += parseFloat(sumval) //+OpeningB1;
         });
-        $("#lblPKSumVal").text(sumBal);
+        $("#lblPKSumVal").text(sumBal.toLocaleString('en-CA'));
         
 
         var lblFBR5 = (parseFloat(($('#BlotterDTLReportDayWise .CRR5PcrReq')[0].innerText).replace(/\,/g, '')) * 14).toLocaleString('en-CA');
-        $("#lblFBR5").text(lblFBR5);
+    $("#lblFBR5").text(lblFBR5.toLocaleString('en-CA'));
 
         var lblbmapval = $('#BalMaintAgainstPenalty').val();
-        $("#lblbmap").text(lblbmapval);
+    $("#lblbmap").text(lblbmapval.toLocaleString('en-CA'));
 
         var lblbmaebval = $('#BalMaintAgainstExtBenft').val();
-        $("#lblbmaeb").text(lblbmaebval);
+    $("#lblbmaeb").text(lblbmaebval.toLocaleString('en-CA'));
 
         var AvgBHval1 = $('#BlotterDTLReportDayWise .PKSumVal')[0].innerText;
-        $("#AvgBHval1").text(AvgBHval1);
+    $("#AvgBHval1").text(AvgBHval1.toLocaleString('en-CA'));
         
 
         var AvgBHval2 = parseFloat(($('#BlotterDTLReportShort .AvgBH')[0].innerText).replace(/\,/g, '')) - parseFloat(($('#BlotterDTLReportShort .FBR5')[0].innerText).replace(/\,/g, ''));
-        $("#AvgBHval2").text(AvgBHval2);
+    $("#AvgBHval2").text(AvgBHval2.toLocaleString('en-CA'));
 
         var lblrfsw = (parseFloat(($('#CRR3PcrReq').val()).replace(/\,/g, '')) - parseFloat(($('#BlotterDTLReportDayWise .CRR5PcrReq')[0].innerText).replace(/\,/g, ''))) + parseFloat(($('#BlotterDTLReportDayWise .ReserveSurplus')[12].innerText).replace(/\,/g, ''));
-        $("#lblrfsw").text(lblrfsw);
+    $("#lblrfsw").text(lblrfsw.toLocaleString('en-CA'));
         
         var AvgBHval3 = null;
         if (((0.05 / parseFloat(($('#BlotterDTLReportShort .FBR5')[0].innerText).replace(/\,/g, '')) * parseFloat(($('#BlotterDTLReportShort .AvgBH')[0].innerText).replace(/\,/g, ''))) * 100) >= 5) {
             AvgBHval3 = ((0.05 / parseFloat(($('#BlotterDTLReportShort .FBR5')[0].innerText).replace(/\,/g, '')) * parseFloat(($('#BlotterDTLReportShort .AvgBH')[0].innerText).replace(/\,/g, ''))) * 100).toFixed(2);
-            $("#AvgBHval3").text(AvgBHval3+'%');
+            $("#AvgBHval3").text(AvgBHval3 + '%');
+            $("#tdAvgBHval3").css({ "color": "#1ec141", "font-weight": "bold", "background-color": "#73ff71bf" });
         }
         else {
             AvgBHval3 = ((0.05 / parseFloat(($('#BlotterDTLReportShort .FBR5')[0].innerText).replace(/\,/g, '')) * parseFloat(($('#BlotterDTLReportShort .AvgBH')[0].innerText).replace(/\,/g, ''))) * 100).toFixed(2);
-            $("#AvgBHval3").text(AvgBHval3+'%');
+            $("#AvgBHval3").text(AvgBHval3 + '%');
+            $("#tdAvgBHval3").css({ "color": "#f00", "font-weight": "bold", "background-color": "#ff7171bf" });
         }
 
         var AvgBHval4 = null;
         if ((0.05 / (parseFloat(($('#CRR5PcrReqWithoutEB').val()).replace(/\,/g, '')) * 14)) * parseFloat(($('#BlotterDTLReportDayWise .PKSumVal')[0].innerText).replace(/\,/g, '')) * 100 >= parseFloat($('#BalMaintAgainstExtBenft').val())) {
-            AvgBHval4 = ((0.05 / (parseFloat(($('#CRR5PcrReqWithoutEB').val()).replace(/\,/g, '')) * 14)) * parseFloat(($('#BlotterDTLReportDayWise .PKSumVal')[0].innerText).replace(/\,/g, '')) * 100).toFixed(2);
-            $("#AvgBHval4").text(AvgBHval4+'%');
+            AvgBHval4 = ((0.05 / (parseFloat(($('#CRR5PcrReqWithoutEB').val().replace(/\,/g, ''))) * 14)) * parseFloat(($('#BlotterDTLReportDayWise .PKSumVal')[0].innerText).replace(/\,/g, '')) * 100).toFixed(2);
+            $("#AvgBHval4").text(AvgBHval4 + '%');
+            $("#tdAvgBHval4").css({ "color": "#1ec141", "font-weight": "bold","background-color":"#73ff71bf" });
         }
         else {
             AvgBHval4 = ((0.05 / (parseFloat(($('#CRR5PcrReqWithoutEB').val()).replace(/\,/g, '')) * 14)) * parseFloat(($('#BlotterDTLReportDayWise .PKSumVal')[0].innerText).replace(/\,/g, '')) * 100).toFixed(2);
-            $("#AvgBHval4").text(AvgBHval4+'%');
+            $("#AvgBHval4").text(AvgBHval4 + '%');
+            $("#tdAvgBHval4").css({ "color": "#f00", "font-weight": "bold", "background-color": "#ff7171bf" });
         }
 
         var AvgBHHeadingVal = null;
         if (parseFloat(($('#BlotterDTLReportShort .AvgBH')[0].innerText).replace(/\,/g, '')) > parseFloat(($('#BlotterDTLReportShort .FBR5')[0].innerText).replace(/\,/g, ''))) {
             AvgBHHeadingVal = 'Fortnightly Long Position';
-            $("#lblAvgBHHeading").text(AvgBHHeadingVal);
+            $("#lblAvgBHHeading").text(AvgBHHeadingVal.toLocaleString('en-CA'));
         } else if (parseFloat(($('#BlotterDTLReportShort .AvgBH')[0].innerText).replace(/\,/g, '')) < parseFloat(($('#BlotterDTLReportShort .FBR5')[0].innerText).replace(/\,/g, ''))) {
             AvgBHHeadingVal = 'Fortnightly Short Position';
-            $("#lblAvgBHHeading").text(AvgBHHeadingVal);
+            $("#lblAvgBHHeading").text(AvgBHHeadingVal.toLocaleString('en-CA'));
         }
 
 
         var RoomforSecondWed = (parseFloat(($('#CRR3PcrReq').val()).replace(/\,/g, '')) - parseFloat(($('#BlotterDTLReportDayWise .CRR5PcrReq')[0].innerText).replace(/\,/g, ''))) + parseFloat(($('#BlotterDTLReportDayWise .ReserveSurplus')[12].innerText).replace(/\,/g, ''));
-        $("lblrfsw").text(RoomforSecondWed);
+    $("lblrfsw").text(RoomforSecondWed.toLocaleString('en-CA'));
     });
 </script>
 <div>
@@ -105,6 +109,7 @@
                             <th>Long/(short) in 3% Amount</th>
                             <th>AvgForRemDays</th>
                             <th>Reserve/Surplus as per 5%</th>
+                            <th>SBP Reserve</th>
                             <th>Reserve</th>
                             <th>Remarks</th>
                             @*<th>Penalty</th>*@
@@ -116,35 +121,36 @@
                             var i = 0;
                             foreach (var item in ViewBag.SBP_BlotterCRRReportDaysWiseBal)
                             {
-                                <tr>
-                                    <td align="left" width="8%">@item.ReportDate.ToString("dd/MM/yyyy")</td>
-                                    <td align="left" width="8%">@item.WeekDays</td>
-                                    @*<td align="left" width="8%" class="KHISum">@item.KarachiTotal.ToString("#,##0,,")</td>*@
-                                    <td align="left" width="8%" class="CRR5PcrReq">@item.CRR5PcrReq.ToString("#,##0,,")</td>
-                                    <td align="left" width="8%" class="PKSum">@item.PakistanToTal.ToString("#,##0,,")</td>
-                                    <td align="left" width="8%">@((item.BalMaintain5Pcr).ToString("#0.##0%"))</td>
-                                    @*<td align="left" width="8%">@item.BalMaintain3Pcr</td>*@
-                                    <td align="left" width="8%">@((Convert.ToDecimal(item.PakistanToTal) - Convert.ToDecimal(item.CRR5PcrReq)).ToString("#,##0,,"))</td>
-                                    <td align="left" width="8%">@((Convert.ToDecimal(item.PakistanToTal) - Convert.ToDecimal(item.CRR3PcrReq)).ToString("#,##0,,"))</td>
-                                    <td align="left" width="8%">@((item.AvgForRemDays).ToString("#,##0,,"))</td>
-                                    <td align="left" width="8%" class="ReserveSurplus">@((item.ReserveSurplus).ToString("#,##0,,"))</td>
-                                    <td align="left" width="8%">@((item.Reserve).ToString("#0.##0%"))</td>
-                                    @*<td align="left" width="8%">@item.CRR3PcrReq.ToString("#,##0,,")</td>*@
-                                    @if (item.Remarks == "Warning")
-                                    {
-                                        <td align="left" width="8%" style="background-color: #ff7171bf;   color: #f00;  font-weight: bold;">@item.Remarks</td>
-                                    }
-                                    else if (item.Remarks == "OK")
-                                    {
-                                        <td align="left" width="8%" style="background-color: #73ff71bf;   color: #1ec141;  font-weight: bold;">@item.Remarks</td>
-                                    }
-                                    else
-                                    {
-                                        <td align="left" width="8%">@item.Remarks</td>
-                                    }
+                        <tr>
+                            <td align="left" width="8%">@item.ReportDate.ToString("dd/MM/yyyy")</td>
+                            <td align="left" width="8%">@item.WeekDays</td>
+                            @*<td align="left" width="8%" class="KHISum">@item.KarachiTotal.ToString("#,##0,,")</td>*@
+                            <td align="left" width="8%" class="CRR5PcrReq">@item.CRR5PcrReq.ToString("#,##0,,")</td>
+                            <td align="left" width="8%" class="PKSum">@item.PakistanToTal.ToString("#,##0,,")</td>
+                            <td align="left" width="8%">@((item.BalMaintain5Pcr).ToString("#0.##0%"))</td>
+                            @*<td align="left" width="8%">@item.BalMaintain3Pcr</td>*@
+                            <td align="left" width="8%">@((Convert.ToDecimal(item.PakistanToTal) - Convert.ToDecimal(item.CRR5PcrReq)).ToString("#,##0,,"))</td>
+                            <td align="left" width="8%">@((Convert.ToDecimal(item.PakistanToTal) - Convert.ToDecimal(item.CRR3PcrReq)).ToString("#,##0,,"))</td>
+                            <td align="left" width="8%">@((item.AvgForRemDays).ToString("#,##0,,"))</td>
+                            <td align="left" width="8%" class="ReserveSurplus">@((item.ReserveSurplus).ToString("#,##0,,"))</td>
+                            <td align="left" width="8%">@((item.ReservedSBP).ToString("#,##0,,"))</td>
+                            <td align="left" width="8%">@((item.Reserve).ToString("#0.##0%"))</td>
+                            @*<td align="left" width="8%">@item.CRR3PcrReq.ToString("#,##0,,")</td>*@
+                            @if (item.Remarks == "Warning")
+                            {
+                                <td align="left" width="8%" style="background-color: #ff7171bf;   color: #f00;  font-weight: bold;">@item.Remarks</td>
+                            }
+                            else if (item.Remarks == "OK")
+                            {
+                                <td align="left" width="8%" style="background-color: #73ff71bf;   color: #1ec141;  font-weight: bold;">@item.Remarks</td>
+                            }
+                            else
+                            {
+                                <td align="left" width="8%">@item.Remarks</td>
+                            }
 
-                                    @*<td align="left" width="8%">@item.Penalty.ToString("#,##0,,M")</td>*@
-                                </tr>
+                            @*<td align="left" width="8%">@item.Penalty.ToString("#,##0,,M")</td>*@
+                        </tr>
                             }
                         }
                         <tr>
@@ -189,12 +195,12 @@
                             <td>
                                 <label id="AvgBHval1" class="AvgBH"></label>
                             </td>
-                            <td align="left" width="8%" style="background-color: #73ff71bf; color: #1ec141; font-weight: bold;">
+                            <td align="left" width="8%" id="tdAvgBHval3" >
                                 <label id="AvgBHval3"></label>
                             </td>
 
                             <td>Including Benefit</td>
-                            <td align="left" width="8%" style="background-color: #73ff71bf;   color: #1ec141;  font-weight: bold;">
+                            <td align="left"  width="8%" id="tdAvgBHval4">
                                 <label id="AvgBHval4"></label>
                             </td>
 

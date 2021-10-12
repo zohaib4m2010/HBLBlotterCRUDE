@@ -58,6 +58,7 @@
         <thead>
             <tr>
                 <th>S.No. </th>
+                <th>BlotterType</th>
                 <th>Page Name</th>
                 <th>Controller Name</th>
                 <th>Display Name</th>
@@ -70,20 +71,29 @@
             {
                 foreach (var item in Model)
                 {
-                    <tr>
-                        <td width="6%">@Html.DisplayFor(modelItem => item.WPID)</td>
-                        <td align="left" width="8%">@Html.DisplayFor(modelItem => item.PageName)</td>
-                        <td align="left" width="8%">@Html.DisplayFor(modelItem => item.ControllerName)</td>
-                        <td align="left" width="8%">@Html.DisplayFor(modelItem => item.DisplayName)</td>
-                        <td align="right" width="10%">@Html.DisplayFor(modelItem => item.isActive)</td>
+            <tr>
+                <td width="6%">@Html.DisplayFor(modelItem => item.WPID)</td>
+                @if (item.BlotterType == 0)
+                {
+                    <td align="left" width="8%">LCY</td>}
+                else if (item.BlotterType == 1)
+                {
+                    <td align="left" width="8%">FCY</td>}
+                else
+                {
+                    <td align="left" width="8%">All</td>}
+                <td align="left" width="8%">@Html.DisplayFor(modelItem => item.PageName)</td>
+                <td align="left" width="8%">@Html.DisplayFor(modelItem => item.ControllerName)</td>
+                <td align="left" width="8%">@Html.DisplayFor(modelItem => item.DisplayName)</td>
+                <td align="right" width="10%">@Html.DisplayFor(modelItem => item.isActive)</td>
 
 
-                        <td width="18%" align="right">
-                            @Html.ActionLink("Edit", "Edit", new { id = item.WPID }) |
-                            @*@Html.ActionLink("Details", "Details", new { id = item.SNo }) |*@
-                            @Html.ActionLink("Delete", "Delete", new { id = item.WPID })
-                        </td>
-                    </tr>
+                <td width="18%" align="right">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.WPID }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.SNo }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.WPID })
+                </td>
+            </tr>
 
                 }
             }

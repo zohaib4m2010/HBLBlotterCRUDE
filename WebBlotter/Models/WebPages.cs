@@ -22,5 +22,6 @@ namespace WebBlotter.Models
         public bool isActive { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<int> BlotterType { get; set; }
     }
 }

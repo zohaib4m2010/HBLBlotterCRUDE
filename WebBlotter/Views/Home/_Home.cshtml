@@ -126,6 +126,7 @@
                                 <th>Long/(short) in 3% Amount</th>
                                 <th>AvgForRemDays</th>
                                 <th>Reserve/Surplus as per 5%</th>
+                                <th>SBP Reserve</th>
                                 <th>Reserve</th>
                                 <th>Remarks</th>
                                 @*<th>Penalty</th>*@
@@ -137,35 +138,36 @@
                                 var i = 0;
                                 foreach (var item in ViewBag.SBP_BlotterCRRReportDaysWiseBal)
                                 {
-                                    <tr>
-                                        <td align="left" width="8%">@item.ReportDate.ToString("dd/MM/yyyy")</td>
-                                        <td align="left" width="8%">@item.WeekDays</td>
-                                        @*<td align="left" width="8%" class="KHISum">@item.KarachiTotal.ToString("#,##0,,")</td>*@
-                                        <td align="left" width="8%" class="CRR5PcrReq">@item.CRR5PcrReq.ToString("#,##0,,")</td>
-                                        <td align="left" width="8%" class="PKSum">@item.PakistanToTal.ToString("#,##0,,")</td>
-                                        <td align="left" width="8%">@((item.BalMaintain5Pcr).ToString("#0.##0%"))</td>
-                                        @*<td align="left" width="8%">@item.BalMaintain3Pcr</td>*@
-                                        <td align="left" width="8%">@((Convert.ToDecimal(item.PakistanToTal) - Convert.ToDecimal(item.CRR5PcrReq)).ToString("#,##0,,"))</td>
-                                        <td align="left" width="8%">@((Convert.ToDecimal(item.PakistanToTal) - Convert.ToDecimal(item.CRR3PcrReq)).ToString("#,##0,,"))</td>
-                                        <td align="left" width="8%">@((item.AvgForRemDays).ToString("#,##0,,"))</td>
-                                        <td align="left" width="8%" class="ReserveSurplus">@((item.ReserveSurplus).ToString("#,##0,,"))</td>
-                                        <td align="left" width="8%">@((item.Reserve).ToString("#0.##0%"))</td>
-                                        @*<td align="left" width="8%">@item.CRR3PcrReq.ToString("#,##0,,")</td>*@
-                                        @if (item.Remarks == "Warning")
-                                        {
-                                            <td align="left" width="8%" style="background-color: #ff7171bf;   color: #f00;  font-weight: bold;">@item.Remarks</td>
-                                        }
-                                        else if (item.Remarks == "OK")
-                                        {
-                                            <td align="left" width="8%" style="background-color: #73ff71bf;   color: #1ec141;  font-weight: bold;">@item.Remarks</td>
-                                        }
-                                        else
-                                        {
-                                            <td align="left" width="8%">@item.Remarks</td>
-                                        }
+                            <tr>
+                                <td align="left" width="8%">@item.ReportDate.ToString("dd/MM/yyyy")</td>
+                                <td align="left" width="8%">@item.WeekDays</td>
+                                @*<td align="left" width="8%" class="KHISum">@item.KarachiTotal.ToString("#,##0,,")</td>*@
+                                <td align="left" width="8%" class="CRR5PcrReq">@item.CRR5PcrReq.ToString("#,##0,,")</td>
+                                <td align="left" width="8%" class="PKSum">@item.PakistanToTal.ToString("#,##0,,")</td>
+                                <td align="left" width="8%">@((item.BalMaintain5Pcr).ToString("#0.##0%"))</td>
+                                @*<td align="left" width="8%">@item.BalMaintain3Pcr</td>*@
+                                <td align="left" width="8%">@((Convert.ToDecimal(item.PakistanToTal) - Convert.ToDecimal(item.CRR5PcrReq)).ToString("#,##0,,"))</td>
+                                <td align="left" width="8%">@((Convert.ToDecimal(item.PakistanToTal) - Convert.ToDecimal(item.CRR3PcrReq)).ToString("#,##0,,"))</td>
+                                <td align="left" width="8%">@((item.AvgForRemDays).ToString("#,##0,,"))</td>
+                                <td align="left" width="8%" class="ReserveSurplus">@((item.ReserveSurplus).ToString("#,##0,,"))</td>
+                                <td align="left" width="8%">@((item.ReservedSBP).ToString("#,##0,,"))</td>
+                                <td align="left" width="8%">@((item.Reserve).ToString("#0.##0%"))</td>
+                                @*<td align="left" width="8%">@item.CRR3PcrReq.ToString("#,##0,,")</td>*@
+                                @if (item.Remarks == "Warning")
+                                {
+                                    <td align="left" width="8%" style="background-color: #ff7171bf;   color: #f00;  font-weight: bold;">@item.Remarks</td>
+                                }
+                                else if (item.Remarks == "OK")
+                                {
+                                    <td align="left" width="8%" style="background-color: #73ff71bf;   color: #1ec141;  font-weight: bold;">@item.Remarks</td>
+                                }
+                                else
+                                {
+                                    <td align="left" width="8%">@item.Remarks</td>
+                                }
 
-                                        @*<td align="left" width="8%">@item.Penalty.ToString("#,##0,,M")</td>*@
-                                    </tr>
+                                @*<td align="left" width="8%">@item.Penalty.ToString("#,##0,,M")</td>*@
+                            </tr>
                                 }
                             }
                             <tr>

@@ -55,15 +55,18 @@
     @using (Html.BeginForm(Session["ActiveController"].ToString(), Session["ActiveAction"].ToString(), FormMethod.Post))
     {
         @Html.AntiForgeryToken();
-        <div class="row">
-            <br />
-            <div class="col-md-2">
-                <input id="SearchByDateId" name="SearchByDate" type="date" value="@ViewBag.CurrentDt" class="form-control datepicker text-box single-line" />
-            </div>
-            <div class="col-md-2">
-                <input type="submit" class="btn btn-success" style="width: 200px" name="Save" value="Search" />
-            </div>
+    <div class="row">
+        <br />
+        <div class="col-md-2">
+            <input id="SearchByDateId" name="SearchByDate" type="date" value="@ViewBag.CurrentDt" class="form-control datepicker text-box single-line" />
         </div>
+        <div class="col-md-3">
+            <input type="submit" class="btn btn-success" id="SearchManualDataByDate" style="width: 200px" name="SearchManualDataByDate" value="Search" />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" class="btn btn-success" id="LoadData" style="width: 200px" name="LoadData" value="Load Data" />
+        </div>
+    </div>
     }
     <!--Search By Date -->
 
@@ -96,11 +99,9 @@
             </div>
         }
         <br />
-        <div class="fw-body">
+        <div class="fw-body" id="FillDumpBlotter">
             @if ((Model.GetAllBlotter01 != null && Model.GetAllBlotter01.Count > 0) || (Model.GetAllBlotterFCY01 != null && Model.GetAllBlotterFCY01.Count > 0))
             {
-                using (Html.BeginForm("_Create", "Blotter", FormMethod.Post))
-                {
                     <div class="content">
                         <div class="info">
                         </div>
@@ -302,7 +303,7 @@
                             </tbody>
                         </table>
                     </div>
-                }
+                
             }
             else
             {
@@ -326,25 +327,14 @@
 
             return [month, day, year].join('/');
         }
+        //$("#SearchManualDataByDate").click(function () {
+        //    var date = $("#SearchByDateId").val();
+        //    $("#FillDumpBlotter").empty();
+        //    $("#FillDumpBlotter").load("/blotter/GetAllBlotterbydate/?Date=" + date+"&LoadData=false");
+
+        //});
 
     </script>
-    <div>
-
-        @using (Html.BeginForm("SendEmail", "Blotter", FormMethod.Post))
-        {
-            <div class="form-group">
-                @Html.HiddenFor(m => m.SendEmail01.Inflow, new { @Value = 0 })
-                @Html.HiddenFor(m => m.SendEmail01.Outflow, new { @Value = 0 })
-                @*@Html.HiddenFor(m => m.SendEmail01.Balance, new { @Value = 0  })*@
-
-            </div>
-            <div class="form-group">
-                <div>
-                    <input type="submit" value="Confirm & Send E-Mail" class="btn btn-default" />
-                </div>
-            </div>
-        }
-    </div>
 </body>
 
 </html>

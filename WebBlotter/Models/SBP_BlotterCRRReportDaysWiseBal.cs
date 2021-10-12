@@ -8,7 +8,7 @@ namespace WebBlotter.Models
     public class SBP_BlotterCRRReportDaysWiseBal
     {
         public int Id { get; set; }
-        public int CRRFinconId { get; set; }
+        public long CRRFinconId { get; set; }
         public System.DateTime ReportDate { get; set; }
         public string WeekDays { get; set; }
         public Nullable<decimal> KarachiTotal { get; set; }
@@ -40,6 +40,8 @@ namespace WebBlotter.Models
         public decimal CRR5PcrReqWithoutEB { get; set; }
         public Nullable<double> BalMaintAgainstExtBenft { get; set; }
         public Nullable<double> BalMaintAgainstPenalty { get; set; }
+        public Nullable<decimal> ReservedSBP { get; set; }
+        public Nullable<decimal> ReservedSBPDif { get; set; }
         public string Remarks { get; set; }
         public Nullable<int> BR { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
