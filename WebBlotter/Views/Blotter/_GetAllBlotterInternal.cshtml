@@ -55,8 +55,17 @@
     @using (Html.BeginForm(Session["ActiveController"].ToString(), Session["ActiveAction"].ToString(), FormMethod.Post))
     {
         @Html.AntiForgeryToken();
-        <div class="btn-group d-inline my-2 my-lg-0 navbar-right" style="margin-right: 10px !important;" role="group">
-            <input id="BlotterCurrentDateId" name="BlotterCurrentDate" type="date" value="@ViewBag.CurrentDt" onchange="this.form.submit()" class="form-control datepicker text-box single-line" />
+        <div class="row">
+            <br />
+            <div class="col-md-2">
+                <input id="SearchByDateId" name="SearchByDate" type="date" value="@ViewBag.CurrentDt" class="form-control datepicker text-box single-line" />
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-success" id="SearchManualDataByDate" style="width: 200px" name="SearchManualDataByDate" value="Search" />
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="btn btn-success" id="LoadData" style="width: 200px" name="LoadData" value="Load Data" />
+            </div>
         </div>
     }
     <!--Search By Date -->
@@ -72,7 +81,7 @@
                 <script>
                     var OpeningB = 0;
                     var count = 0;
-                    var OpeningB1 =0;
+                    var OpeningB1 = 0;
                 </script>
                 <table id="totalMe" class="table table-striped table-bordered table-hover display">
                     <thead>
@@ -90,7 +99,7 @@
                         @foreach (var item in Model.GetAllBlotter01)
                         {
                             <tr>
-                                <td>@Html.DisplayFor(modelItem => item.DEALNO)</td>
+                                <td>@Html.DisplayFor(modelItem => item.DealNo)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Description)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                 <td align="right" class="sum" id="Inflow">
@@ -169,7 +178,7 @@
                             <td align="right" id="Bal">
                                 <span style="font-weight:bold">
                                     <script>
-                                        var sum2 = sum1+sum+OpeningB1;
+                                        var sum2 = sum1 + sum + OpeningB1;
                                         //$('#totalMe .sum3').each(function () {
                                         //    sum2 += parseFloat(this.innerText.replace(/\,/g, ''));
                                         //});
@@ -193,17 +202,17 @@
     <script type="text/javascript">
 
 
-                function formatDate(date) {
-                    var d = new Date(date),
-                        month = '' + (d.getMonth() + 1),
-                        day = '' + d.getDate(),
-                        year = d.getFullYear();
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
 
-                    if (month.length < 2) month = '0' + month;
-                    if (day.length < 2) day = '0' + day;
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
 
-                    return [month, day, year].join('/');
-                }
+            return [month, day, year].join('/');
+        }
 
 
 

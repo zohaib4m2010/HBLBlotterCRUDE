@@ -52,7 +52,8 @@ namespace WebBlotter.Controllers
                 ServiceRepositoryBlotter serviceObj = new ServiceRepositoryBlotter();
                 HttpResponseMessage response;
                 if (Convert.ToInt32(selectCurrency) == 1)
-                {if(form["LoadData"] != null)
+                {
+                    if(form["LoadData"] != null)
                      response = serviceObj.GetResponse("/api/Blotter/GetAllBlotterList?brcode=" + Session["BR"].ToString() + "&DataType=SBP" + "&CurrentDate=" + BlotterCurrentDate+"&LoadData=true");
                     else
                         response = serviceObj.GetResponse("/api/Blotter/GetAllBlotterList?brcode=" + Session["BR"].ToString() + "&DataType=SBP" + "&CurrentDate=" + BlotterCurrentDate + "&LoadData=false");
@@ -99,9 +100,9 @@ namespace WebBlotter.Controllers
                 else
                     selectCurrency = Convert.ToInt32(Session["SelectedCurrency"].ToString());
 
-                if (form["BlotterCurrentDate"] != null)
+                if (form["SearchByDate"] != null)
                 {
-                    BlotterCurrentDate = form["BlotterCurrentDate"].ToString();
+                    BlotterCurrentDate = form["SearchByDate"].ToString();
                     ViewBag.CurrentDt = BlotterCurrentDate;
                 }
                 else
@@ -114,7 +115,11 @@ namespace WebBlotter.Controllers
                 #endregion
                 BlotterMultiModel blotterMulit = new BlotterMultiModel();
                 ServiceRepositoryBlotter serviceObj = new ServiceRepositoryBlotter();
-                HttpResponseMessage response = serviceObj.GetResponse("/api/Blotter/GetAllBlotterList?brcode=" + Session["BR"].ToString() + "&DataType=HBLC" + "&CurrentDate=" + BlotterCurrentDate);
+                HttpResponseMessage response;
+                if (form["LoadData"] != null)
+                    response = serviceObj.GetResponse("/api/Blotter/GetAllBlotterList?brcode=" + Session["BR"].ToString() + "&DataType=HBLC" + "&CurrentDate=" + BlotterCurrentDate + "&LoadData=true");
+                else
+                    response = serviceObj.GetResponse("/api/Blotter/GetAllBlotterList?brcode=" + Session["BR"].ToString() + "&DataType=HBLC" + "&CurrentDate=" + BlotterCurrentDate + "&LoadData=false");
                 response.EnsureSuccessStatusCode();
                 List<Models.SP_SBPBlotter_Result> blotter = response.Content.ReadAsAsync<List<Models.SP_SBPBlotter_Result>>().Result;
                 // List<blotterMulit.GetAllBlotter01> blotter = response.Content.ReadAsAsync<List<Models.SP_SBPBlotter_Result>>().Result;
