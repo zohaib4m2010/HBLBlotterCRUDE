@@ -1,0 +1,87 @@
+﻿
+@model IEnumerable<WebBlotter.Models.SP_GetSBPBlotterOR_Result>
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/Custom.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+    $(function () {
+        $("#chkAll").change(function () {
+            $('tbody tr td input[type="checkbox"]').prop('checked', $(this).prop('checked'));
+        });
+    });
+</script>
+
+<h3>BLOTTER OutRight</h3>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "primary-btn1 fa fa-plus" })
+</p>
+
+<!--Search By Date -->
+@using (Html.BeginForm(Session["ActiveController"].ToString(), Session["ActiveAction"].ToString(), FormMethod.Post))
+{
+    @Html.AntiForgeryToken();
+    <div class="row">
+        <br />
+        <div class="col-md-2">
+            <input id="SearchByDate" name="SearchByDate" type="date" value="@ViewBag.DateVal" class="form-control datepicker text-box single-line" />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" class="btn btn-success" style="width: 200px" name="Save" value="Search" />
+        </div>
+    </div>
+}
+<!--Search By Date -->
+
+@if (Model.Count() > 0)
+{
+    using (Html.BeginForm("Delete", "BlotterOutRight", FormMethod.Post))
+    {
+        <table id="customers" class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>SNO</th>
+                    @*<th>Data Type</th>*@
+                    <th>Bank</th>
+                    <th>Rate</th>
+                   <th>Broker</th>
+                    <th>Issue Date</th>
+                    <th>Issue Type</th>
+                    <th>In Flow</th>
+                    <th>Out FLow</th>
+                    <th>Note</th>
+                    <th><input type="checkbox" id="chkAll" name="chkAll" /></th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td width="8%">@Html.DisplayFor(modelItem => item.SNo)</td>
+                        @*<td width="8%">@Html.DisplayFor(modelItem => item.DataType)</td>*@
+                        <td width="8%">@Html.DisplayFor(modelItem => item.Bank)</td>
+                        <td width="10%" align="right">@Html.DisplayFor(modelItem => item.Rate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Broker)</td>
+                        <td width="10%">@Html.DisplayFor(modelItem => item.Issue_Date)</td>
+                        <td width="10%">@Html.DisplayFor(modelItem => item.IssueType)</td>
+                        <td width="10%" align="right">@Html.DisplayFor(modelItem => item.InFlow)</td>
+                        <td width="10%" align="right">@Html.DisplayFor(modelItem => item.OutFLow)</td>
+                        <td width="10%" align="right">@Html.DisplayFor(modelItem => item.Note)</td>
+                        <td>
+                            <input type="checkbox" name="employeeIdsToDelete" id="employeeIdsToDelete" value="@item.SNo" />
+                            @*@Html.ActionLink(" ", "Delete", new { id = item.SNo }, new { @class = "btn btn-danger fa fa-trash", @OnClick = "return confirm('Are you sure you want to delete this record?');", @title = "Delete" })*@
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+        <input type="submit" class="btn btn-danger" value="Delete Record" />
+    }
+}

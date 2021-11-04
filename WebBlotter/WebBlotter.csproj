@@ -160,6 +160,7 @@
     <Compile Include="Controllers\BlotterManualDealsController.cs" />
     <Compile Include="Controllers\BlotterOpenBalController.cs" />
     <Compile Include="Controllers\BlotterOpeningController.cs" />
+    <Compile Include="Controllers\BlotterOutRightController.cs" />
     <Compile Include="Controllers\BlotterRECONController.cs" />
     <Compile Include="Controllers\BlotterReservedDiffController.cs" />
     <Compile Include="Controllers\BlotterRTGSController.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Models\SBP_BlotterManualEstBalance.cs" />
     <Compile Include="Models\SBP_BlotterOpeningBalance.cs" />
     <Compile Include="Models\SBP_BlotterOpeningClosingBalanceDIfferential.cs" />
+    <Compile Include="Models\SBP_BlotterOutRight.cs" />
     <Compile Include="Models\SBP_BlotterRECON.cs" />
     <Compile Include="Models\SBP_BlotterRTGS.cs" />
     <Compile Include="Models\BlottterEmails.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="Models\SP_GetSBPBlotterFR_Result.cs" />
     <Compile Include="Models\SP_GetSBPBlotterGH_Result.cs" />
     <Compile Include="Models\SP_GetSBPBlotterOpeningClosingBalanceDIfferential_Result.cs" />
+    <Compile Include="Models\SP_GetSBPBlotterOR_Result.cs" />
     <Compile Include="Models\SP_GetSBPBlotterRECON_Result.cs" />
     <Compile Include="Models\SP_GetSBP_DMMO_Result.cs" />
     <Compile Include="Models\SP_GetSBP_Reserved_Result.cs" />
@@ -1312,6 +1315,8 @@
     <Content Include="Views\GazettedHoliday\_BlotterGH.cshtml" />
     <Content Include="Views\GazettedHoliday\_Create.cshtml" />
     <Content Include="Views\GazettedHoliday\_Edit.cshtml" />
+    <Content Include="Views\BlotterOutRight\BlotterOutRight.cshtml" />
+    <Content Include="Views\BlotterOutRight\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
