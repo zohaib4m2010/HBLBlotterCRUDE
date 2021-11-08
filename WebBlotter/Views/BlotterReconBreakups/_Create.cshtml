@@ -1,0 +1,101 @@
+﻿@model WebBlotter.Models.SBP_BlotterReconBreakups
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("_Create", "BlotterReconBreakups", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <Fieldset>
+        <div class="form-horizontal">
+            <h2>Create Blotter ReconBreakups</h2>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @if (Session["BR"].ToString() != "01")
+            {
+                <div class="form-group">
+                    <label class="control-label col-md-2">Data Type</label>
+                    <div class="col-md-10">
+                        <select name="DataType" class="form-control">
+                            <option value="SBP">State Bank of Pakistan</option>
+                            <option value="HBLC">Inter Branch Account</option>
+                        </select>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="form-group" style="display:none;">
+                    <label class="control-label col-md-2">Data Type</label>
+                    <div class="col-md-10">
+                        <select name="DataType" class="form-control">
+                            <option value="SBP">State Bank of Pakistan</option>
+                        </select>
+                    </div>
+                </div>
+            }
+            <div class="form-group">
+                <label class="control-label col-md-2">Select Branch</label>
+                <div class="col-md-10">
+                    @*@Html.DropDownListFor(model2 => model2.TTTID, new SelectList(Model.TTTID.ToString(), "datavaluefield", "datatextfield", Model.TTTID))*@
+                    <select name="BID" class="form-control">
+                        @foreach (var item in ViewBag.ReconBreakupsBranches)
+                        {
+                            <option value="@item.BID">@item.BranchName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Select Type</label>
+                <div class="col-md-10">
+                    @*@Html.DropDownListFor(model2 => model2.TTTID, new SelectList(Model.TTTID.ToString(), "datavaluefield", "datatextfield", Model.TTTID))*@
+                    <select name="TTID" class="form-control">
+                        @foreach (var item in ViewBag.ReconBreakupsTransactionTitles)
+                        {
+                            <option value="@item.TTID">@item.TranctionTitle</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.RECON_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.EditorFor(model => model.RECON_Date, new { htmlAttributes = new { @class = "form-control datepicker", @Value = DateTime.Now.ToString("yyyy-MM-dd") } })
+
+                    @Html.ValidationMessageFor(model => model.RECON_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.RECON_InFlow, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RECON_InFlow, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RECON_InFlow, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.RECON_OutFLow, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RECON_OutFLow, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RECON_OutFLow, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input class="form-control" type="submit" value="Create" />
+                </div>
+            </div>
+        </div>
+    </Fieldset>
+}
