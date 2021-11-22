@@ -161,6 +161,7 @@
     <Compile Include="Controllers\BlotterOpenBalController.cs" />
     <Compile Include="Controllers\BlotterOpeningController.cs" />
     <Compile Include="Controllers\BlotterOutRightController.cs" />
+    <Compile Include="Controllers\BlotterProjectionController.cs" />
     <Compile Include="Controllers\BlotterReconBreakupsController.cs" />
     <Compile Include="Controllers\BlotterRECONController.cs" />
     <Compile Include="Controllers\BlotterReservedDiffController.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Models\SBP_BlotterOpeningBalance.cs" />
     <Compile Include="Models\SBP_BlotterOpeningClosingBalanceDIfferential.cs" />
     <Compile Include="Models\SBP_BlotterOutRight.cs" />
+    <Compile Include="Models\SBP_BlotterProjection.cs" />
     <Compile Include="Models\SBP_BlotterRECON.cs" />
     <Compile Include="Models\SBP_BlotterReconBreakups.cs" />
     <Compile Include="Models\SBP_BlotterRTGS.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Models\SP_GetSBPBlotterRECON_Result.cs" />
     <Compile Include="Models\SP_GetSBP_DMMO_Result.cs" />
     <Compile Include="Models\SP_GetSBP_Reserved_Result.cs" />
+    <Compile Include="Models\SP_Get_BlotterProjection_Result.cs" />
     <Compile Include="Models\SP_SBPBlotterRunningBal.cs" />
     <Compile Include="Models\SP_SBPBlotter_FCY_Result.cs" />
     <Compile Include="Models\SP_SBPGetLoginInfo_Result.cs" />
@@ -1323,6 +1326,7 @@
     <Content Include="Views\BlotterReconBreakups\_BlotterReconBreakups.cshtml" />
     <Content Include="Views\BlotterReconBreakups\_Create.cshtml" />
     <Content Include="Views\BlotterReconBreakups\_Edit.cshtml" />
+    <Content Include="Views\BlotterProjection\_BlotterProjection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
